@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkwiki=globalThis.webpackChunkwiki||[]).push([[2457],{9613(a){a.exports=JSON.parse('{"metadata":{"permalink":"/tmp-wiki/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
