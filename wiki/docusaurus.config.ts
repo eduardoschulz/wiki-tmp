@@ -18,12 +18,12 @@ const config: Config = {
   url: 'https://eduardoschulz.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/tmp-wiki/',
+  baseUrl: '/wiki-tmp/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'eduardoschulz', // Usually your GitHub org/user name.
-  projectName: 'tmp-wiki', // Usually your repo name.
+  projectName: 'wiki-tmp', // Usually your repo name.
   deploymentBranch: 'gh-pages',
 
 
