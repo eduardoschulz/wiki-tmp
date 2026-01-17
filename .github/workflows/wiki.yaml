@@ -7,10 +7,6 @@ on:
     # Optional: Only run if files in the wiki folder change
     paths:
       - 'wiki/**'
-
-permissions:
-  contents: write
-
 jobs:
   deploy:
     name: Deploy to GitHub Pages
