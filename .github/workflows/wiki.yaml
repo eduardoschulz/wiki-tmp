@@ -37,13 +37,11 @@ jobs:
         working-directory: ./wiki
         run: yarn build
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          # The build output folder inside your wiki directory
-          publish_dir: ./wiki/build
-          # The branch where the static site will live
-          publish_branch: gh-pages
-          # Keep other files in the gh-pages branch if any (optional)
-          keep_files: false
+          path: ./wiki/build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
