@@ -9,33 +9,40 @@ on:
       - 'wiki/**'
 jobs:
   deploy:
-    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Setup Node
+      # 👇 Build steps
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'yarn'
-          # This tells the cache where to find the yarn.lock file
+          cache: yarn
+          # Tells GitHub where the yarn.lock is for caching
           cache-dependency-path: wiki/yarn.lock
 
       - name: Install dependencies
+        # Use working-directory so it runs inside /wiki
         working-directory: ./wiki
-        run: yarn install --frozen-lockfile
+        run: yarn install --frozen-lockfile --non-interactive
 
-      - name: Build website
+      - name: Build
         working-directory: ./wiki
         run: yarn build
+      # 👆 Build steps
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          # 👇 Points to the build folder INSIDE the wiki directory
           path: ./wiki/build
 
       - name: Deploy to GitHub Pages
