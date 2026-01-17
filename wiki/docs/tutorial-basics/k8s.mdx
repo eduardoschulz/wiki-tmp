@@ -1,0 +1,49 @@
+import { StatusBadge, Terminal } from './components';
+
+# Understanding the Pod Lifecycle
+
+In Kubernetes, Pods are ephemeral. They are created, assigned a unique ID (UID), and scheduled to nodes where they remain until termination or deletion.
+
+## Pod Phases
+
+A Pod's `status` object contains a `phase` field. Here is a breakdown of what each state means:
+
+| Phase | Description |
+| :--- | :--- |
+| **Pending** | The Pod has been accepted by the cluster, but one or more containers are not yet running. |
+| **Running** | The Pod has been bound to a node, and all containers have been created. |
+| **Succeeded** | All containers in the Pod have terminated successfully (exit code 0). |
+| **Failed** | All containers have terminated, and at least one container terminated in failure. |
+
+
+
+---
+
+## Interactive Example: Checking Status
+
+You can check the current phase of your pods using `kubectl`. Try running the command below in your local environment:
+
+<Terminal command="kubectl get pods -n default" />
+
+### Current Deployment Health
+<StatusBadge phase="Running" message="All systems nominal" />
+
+---
+
+## Probes: The Heartbeat of a Pod
+
+To ensure your application is actually healthy (and not just "running"), Kubernetes uses Probes.
+
+### 1. Liveness Probe
+Used to know when to restart a container. For example, if your app hangs.
+
+### 2. Readiness Probe
+Used to know when a container is ready to start accepting traffic.
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 3
+  periodSeconds: 3
